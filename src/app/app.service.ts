@@ -9,6 +9,6 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   getUser(id: number) {
-    return this.http.get<User>(`${this.basePath}/users/${id}`)
+    return this.http.get<User>(`${this.basePath}/usuarios/${id}`)
   }
 }

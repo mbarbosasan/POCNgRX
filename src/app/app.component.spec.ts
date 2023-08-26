@@ -1,12 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {Store} from "@ngrx/store";
+import {provideMockStore} from "@ngrx/store/testing";
+import {provideMockActions} from "@ngrx/effects/testing";
+import {Actions} from "@ngrx/effects";
+import {ReactiveFormsModule} from "@angular/forms";
 
 describe('AppComponent', () => {
+  let actions: Actions;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
       ],
+      imports: [
+        ReactiveFormsModule
+      ],
+      providers: [
+        provideMockStore({}),
+        provideMockActions(() => actions)
+      ]
     }).compileComponents();
   });
 
@@ -14,18 +27,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'ngrxPOC'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('ngrxPOC');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ngrxPOC app is running!');
   });
 });
